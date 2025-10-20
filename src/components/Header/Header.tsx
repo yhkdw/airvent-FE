@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import {
@@ -17,11 +17,13 @@ import LoginSignupModal from "../Modal/LoginSignupModal";
 
 type NavItem = {
   name: string;
-  content?: {
-    name: string;
-    path?: string;
-    url?: string;
-  }[];
+  content?: SubNavItem[];
+  path?: string;
+  url?: string;
+};
+
+type SubNavItem = {
+  name: string;
   path?: string;
   url?: string;
 };
@@ -46,22 +48,22 @@ const navItems: NavItem[] = [
   },
   {
     name: "Q&A",
-    url: "",
+    url: "mailto:info@airventinc.co.kr",
   },
   {
     name: "Social",
     content: [
       {
         name: "Discord",
-        url: "",
+        url: "https://discord.gg/TqRsUwMmyR",
       },
       {
         name: "Telegram",
-        url: "",
+        url: "https://t.me/airventinccokr",
       },
       {
         name: "X",
-        url: "",
+        url: "https://x.com/airventinccokr",
       },
     ],
   },
@@ -82,7 +84,7 @@ const Header = () => {
     if (item.url) window.open(item.url, "_blank");
   };
 
-  const handleSubLinkClick = (subItem: NavItem["content"][0]) => {
+  const handleSubLinkClick = (subItem: SubNavItem) => {
     if (subItem.path) return;
     if (subItem.url) window.open(subItem.url, "_blank");
   };
