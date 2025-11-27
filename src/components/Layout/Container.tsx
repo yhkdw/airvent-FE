@@ -11,11 +11,11 @@ interface ContainerProps {
 
 const Container = ({ children, className = "" }: ContainerProps) => {
   return (
-    <div
+    <section
       className={`flex flex-col items-center justify-center bg-[#F9FAFB] px-5 ${className}`}
     >
       {children}
-    </div>
+    </section>
   );
 };
 

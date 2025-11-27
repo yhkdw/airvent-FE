@@ -10,7 +10,7 @@ import {
 import { CheckCircle, Shield, Truck } from "lucide-react";
 
 import pro from "@/assets/Product/pro.png";
-import titan from "@/assets/Product/pro.png"; // TODO : 실제 사진으로 변경
+import titan from "@/assets/Product/titan.png"; // TODO : 실제 사진으로 변경
 
 interface ProductDetailProps {
   productType: string;
@@ -36,11 +36,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
       <Container className="py-6 lg:px-0 lg:py-15">
         <div className="mx-auto flex w-full max-w-xl flex-col gap-6">
           {/* Image Container */}
-          <div className="rounded-xl border border-[1px] border-[#E5E7EB] bg-white p-8">
+          <div className="overflow-hidden rounded-xl border border-[1px] border-[#E5E7EB] bg-white p-8">
             <img
               src={productType === "pro" ? pro : titan}
               alt="Air Quality Monitor"
-              className="h-auto w-full"
+              className="h-auto w-full scale-150"
             />
           </div>
 
@@ -158,16 +158,16 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
             {/* TODO : 구매는 추후에, 지갑 연결 후 abled */}
             <HoverCard>
               <HoverCardTrigger>
-                <Link to={`/checkout/${productType}/${selectedColor}`}>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="w-full lg:h-14"
-                    // disabled
-                  >
-                    Buy Now
-                  </Button>
-                </Link>
+                {/* <Link to={`/checkout/${productType}/${selectedColor}`}> */}
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full lg:h-14"
+                  disabled
+                >
+                  December OpenSale
+                </Button>
+                {/* </Link> */}
               </HoverCardTrigger>
               <HoverCardContent align="end">Coming Soon</HoverCardContent>
             </HoverCard>

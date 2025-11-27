@@ -42,10 +42,10 @@ const navItems: NavItem[] = [
       },
     ],
   },
-  {
-    name: "Dash Board",
-    path: "/dashboard",
-  },
+  // {
+  //   name: "Dash Board",
+  //   path: "/dashboard",
+  // },
   {
     name: "Q&A",
     url: "mailto:info@airventinc.co.kr",
@@ -90,20 +90,20 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <header className="sticky top-0 z-50 w-full bg-white backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="w-full px-4 lg:px-20">
         <div className="flex h-20 items-center justify-between lg:h-36">
           {/* 로고 */}
           <div className="w-[30px] lg:hidden"></div>
           <div className="flex items-center lg:flex-none">
-            <Link to="/">
+            <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
               <img src={logo} className="h-10 lg:h-14" />
             </Link>
           </div>
 
           <div className="hidden w-full items-center justify-end gap-8 lg:flex">
             {/* PC 네비게이션 */}
-            <NavigationMenu>
+            <NavigationMenu viewport={false}>
               <NavigationMenuList>
                 {navItems.map((nav, index) => (
                   <NavigationMenuItem key={index}>
@@ -114,28 +114,28 @@ const Header = () => {
                           {nav.name}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                          <div className="flex w-60 flex-col">
+                          <div className="flex w-full flex-col">
                             {nav.content.map((subItem, subIndex) => (
                               <NavigationMenuLink key={subIndex} asChild>
                                 {subItem.path ? (
                                   <Link
                                     to={subItem.path}
-                                    className={`hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none ${
+                                    className={`hover:text-accent-foreground focus:text-accent-foreground block space-y-1 p-4 text-center leading-none text-[#6B7280] no-underline transition-colors outline-none select-none ${
                                       isActive(subItem.path)
-                                        ? "bg-accent text-accent-foreground"
+                                        ? "text-accent-foreground"
                                         : ""
                                     }`}
                                   >
-                                    <div className="text-sm leading-none font-medium">
+                                    <div className="text-xl leading-none">
                                       {subItem.name}
                                     </div>
                                   </Link>
                                 ) : (
                                   <button
                                     onClick={() => handleSubLinkClick(subItem)}
-                                    className="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block w-full space-y-1 rounded-md p-3 text-left leading-none no-underline transition-colors outline-none select-none"
+                                    className="hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block w-full space-y-1 p-4 text-center leading-none text-[#6B7280] no-underline transition-colors outline-none select-none"
                                   >
-                                    <div className="text-sm leading-none font-medium">
+                                    <div className="text-xl leading-none">
                                       {subItem.name}
                                     </div>
                                   </button>
@@ -151,7 +151,7 @@ const Header = () => {
                         {nav.path ? (
                           <Link
                             to={nav.path}
-                            className={`hover:text-accent-foreground focus:text-accent-foreground block flex h-9 justify-center space-y-1 rounded-md p-3 leading-none text-[#6B7280] no-underline transition-colors outline-none select-none ${
+                            className={`hover:text-accent-foreground focus:text-accent-foreground block flex h-9 justify-center space-y-1 p-3 leading-none text-[#6B7280] no-underline transition-colors outline-none select-none ${
                               isActive(nav.path) ? "text-accent-foreground" : ""
                             }`}
                           >
@@ -160,7 +160,7 @@ const Header = () => {
                         ) : (
                           <button
                             onClick={() => handleLinkClick(nav)}
-                            className="hover:text-accent-foreground focus:text-accent-foreground block flex h-9 justify-center space-y-1 rounded-md p-3 leading-none text-[#6B7280] no-underline transition-colors outline-none select-none"
+                            className="hover:text-accent-foreground focus:text-accent-foreground block flex h-9 justify-center space-y-1 p-3 leading-none text-[#6B7280] no-underline transition-colors outline-none select-none"
                           >
                             {nav.name}
                           </button>
@@ -172,13 +172,13 @@ const Header = () => {
               </NavigationMenuList>
             </NavigationMenu>
 
-            <LoginSignupModal
+            {/* <LoginSignupModal
               setIsMobileMenuOpen={setIsMobileMenuOpen}
               isModalOpen={isModalOpen}
               setIsModalOpen={setIsModalOpen}
               mode={modalMode}
               setMode={setModalMode}
-            />
+            /> */}
           </div>
 
           {/* 모바일 메뉴 버튼 */}
@@ -196,13 +196,13 @@ const Header = () => {
           <div className="lg:hidden">
             <div className="space-y-1 border-t bg-white px-2 pt-4 pb-3">
               <div>
-                <LoginSignupModal
+                {/* <LoginSignupModal
                   setIsMobileMenuOpen={setIsMobileMenuOpen}
                   isModalOpen={isModalOpen}
                   setIsModalOpen={setIsModalOpen}
                   mode={modalMode}
                   setMode={setModalMode}
-                />
+                /> */}
               </div>
               {navItems.map((nav, index) => (
                 <div key={index}>
@@ -247,7 +247,7 @@ const Header = () => {
                       {nav.path ? (
                         <Link
                           to={nav.path}
-                          className={`block rounded-md px-3 py-2 text-base font-medium transition-colors ${
+                          className={`block rounded-md px-3 py-2 text-base font-medium text-gray-700 transition-colors ${
                             isActive(nav.path)
                               ? "bg-accent text-accent-foreground"
                               : "text-foreground hover:bg-accent hover:text-accent-foreground"
@@ -262,7 +262,7 @@ const Header = () => {
                             handleLinkClick(nav);
                             setIsMobileMenuOpen(false);
                           }}
-                          className="text-foreground hover:bg-accent hover:text-accent-foreground block w-full rounded-md px-3 py-2 text-left text-base font-medium transition-colors"
+                          className="hover:bg-accent hover:text-accent-foreground block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-700 transition-colors"
                         >
                           {nav.name}
                         </button>
