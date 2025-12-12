@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Container from "@/components/Layout/Container";
 import { Book, Plug, Smartphone } from "lucide-react";
 
@@ -7,6 +9,17 @@ interface InformationProps {
 }
 
 const Information: React.FC<InformationProps> = ({ productType }) => {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 1024);
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const partsList = [
     {
       icon: (
@@ -49,10 +62,9 @@ const Information: React.FC<InformationProps> = ({ productType }) => {
               key={index}
               className="grid place-items-center gap-4 rounded-lg bg-[#FFFFFF] p-5 shadow-sm lg:gap-5 lg:p-8 lg:shadow-md"
               style={{
-                boxShadow:
-                  window.innerWidth >= 1024
-                    ? "0 4px 24px 0 rgba(0, 0, 0, 0.04)"
-                    : "0 2px 12px 0 rgba(0, 0, 0, 0.04)",
+                boxShadow: isDesktop
+                  ? "0 4px 24px 0 rgba(0, 0, 0, 0.04)"
+                  : "0 2px 12px 0 rgba(0, 0, 0, 0.04)",
               }}
             >
               <div className="flex h-20 w-30 items-center justify-center rounded-lg bg-[#F9FAFB] lg:h-30 lg:w-40">

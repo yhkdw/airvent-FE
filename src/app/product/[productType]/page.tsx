@@ -1,5 +1,3 @@
-"use client";
-
 import { PRODUCTS, type ProductType } from "@/constants/products";
 import ProductDetail from "../components/ProductDetail";
 import Information from "../components/Information";
